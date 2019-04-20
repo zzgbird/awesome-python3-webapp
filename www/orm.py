@@ -100,7 +100,7 @@ class TextField(Field):
 
 class ModelMetaclass(type):
 
-	def  __new__(cls, name, bases, attrs):
+	def __new__(cls, name, bases, attrs):
 		if name=='Model':
 			return type.__new__(cls, name, bases, attrs)	
 		tableName = attrs.get('__table__', None) or name
@@ -123,7 +123,7 @@ class ModelMetaclass(type):
 			raise StandardError('Primary key not found.')
 		for k in mappings.keys():
 			attrs.pop(k)
-		escaped_fields = list(map(lambda f : '`%s`' % f, fields))
+		escaped_fields = list(map(lambda f: '`%s`' % f, fields))
 		attrs['__mappings__'] = mappings # 保存属性和列的映射关系
 		attrs['__table__'] = tableName
 		attrs['__primary_key__'] = primaryKey # 主键属姓名
